@@ -3,6 +3,7 @@
     "displayName": "Generate Prompt Code",
     "description": "Combines selected files into a single document for use in chat UIs",
     "version": "0.0.1",
+    "publisher": "self-similar",
     "engines": {
         "vscode": "^1.85.0"
     },
@@ -10,7 +11,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:generate-prompt-code.generatePrompt"
+        "onCommand:generate-prompt-code.generatePrompt",
+        "onStartupFinished"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -25,7 +27,7 @@
                 {
                     "command": "generate-prompt-code.generatePrompt",
                     "group": "yourGroup@1",
-                    "when": "explorerResourceIsFolder == false && resourceSelected"
+                    "when": "!explorerResourceIsFolder && resourceExtname"
                 }
             ]
         },
