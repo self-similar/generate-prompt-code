@@ -1,6 +1,63 @@
 {
-  "devDependencies": {
-    "@types/node": "^22.15.3",
-    "@types/vscode": "^1.99.1"
-  }
+    "name": "generate-prompt-code",
+    "displayName": "Generate Prompt Code",
+    "description": "Combines selected files into a single document for use in chat UIs",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.85.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:generate-prompt-code.generatePrompt"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "generate-prompt-code.generatePrompt",
+                "title": "Generate Prompt Code"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "generate-prompt-code.generatePrompt",
+                    "group": "yourGroup@1",
+                    "when": "explorerResourceIsFolder == false && resourceSelected"
+                }
+            ]
+        },
+        "configuration": {
+            "title": "Generate Prompt Code",
+            "properties": {
+                "generatePromptCode.separator": {
+                    "type": "string",
+                    "default": "**********",
+                    "description": "Separator to use between file contents in the generated prompt."
+                },
+                "generatePromptCode.includeComments": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Include comments in the generated prompt."
+                },
+                "generatePromptCode.includeFilenames": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Include filenames at the top of each file segment in the generated prompt."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/node": "^18.19.3",
+        "@types/vscode": "^1.85.0",
+        "typescript": "^5.3.3"
+    }
 }
